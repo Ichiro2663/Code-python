@@ -1,0 +1,26 @@
+class HocSinh:
+    def __init__(self, ten):
+        self.ten = ten
+        self.diem_toan = 0
+        self.diem_van = 0
+        self.diem_anh = 0
+
+    def nhap_diem(self):
+        self.diem_toan = float(input(f"Nhập vào điểm môn Toán: "))
+        self.diem_van = float(input(f"Nhập vào điểm môn Văn: "))
+        self.diem_anh = float(input(f"Nhập vào điểm Anh: "))
+
+    def tinh_diem_trung_binh(self):
+        return (self.diem_toan + self.diem_van + self.diem_anh) / 3
+
+def main():
+    ten_hocsinh = input("Nhập vào Họ và Tên: ")
+    hs = HocSinh(ten_hocsinh)
+    
+    hs.nhap_diem()
+    
+    dtb = hs.tinh_diem_trung_binh()
+    print(f"Học sinh {hs.ten} đạt điểm TB các môn là: {dtb:.2f}")
+
+if __name__ == "__main__":
+    main()
