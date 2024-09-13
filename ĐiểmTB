@@ -1,26 +1,56 @@
+# Định nghĩa class HocSinh để lưu trữ tên và điểm của học sinh
 class HocSinh:
     def __init__(self, ten):
+        # Hàm khởi tạo __init__ nhận vào tên học sinh và khởi tạo điểm Toán, Văn, Anh bằng 0
         self.ten = ten
         self.diem_toan = 0
         self.diem_van = 0
         self.diem_anh = 0
 
+    # Hàm nhập điểm cho các môn Toán, Văn, Anh
     def nhap_diem(self):
-        self.diem_toan = float(input(f"Nhập vào điểm môn Toán: "))
-        self.diem_van = float(input(f"Nhập vào điểm môn Văn: "))
-        self.diem_anh = float(input(f"Nhập vào điểm Anh: "))
+        # Sử dụng vòng lặp để đảm bảo điểm nhập vào hợp lệ (trong khoảng từ 0 đến 10)
+        while True:
+            try:
+                # Nhập điểm môn Toán và chuyển giá trị từ string sang float
+                self.diem_toan = float(input(f"Nhập vào điểm môn Toán: "))
+                # Nhập điểm môn Văn
+                self.diem_van = float(input(f"Nhập vào điểm môn Văn: "))
+                # Nhập điểm môn Anh
+                self.diem_anh = float(input(f"Nhập vào điểm Anh: "))
 
+                # Kiểm tra xem điểm có nằm trong khoảng 0 đến 10 hay không
+                if 0 <= self.diem_toan <= 10 and 0 <= self.diem_van <= 10 and 0 <= self.diem_anh <= 10:
+                    break  # Nếu hợp lệ, thoát vòng lặp
+                else:
+                    # Nếu điểm không hợp lệ (không trong khoảng 0-10), in thông báo và yêu cầu nhập lại
+                    print("Điểm phải nằm trong khoảng 0 đến 10. Vui lòng nhập lại.")
+            except ValueError:
+                # Nếu người dùng nhập giá trị không phải là số, in thông báo và yêu cầu nhập lại
+                print("Vui lòng nhập số hợp lệ!")
+
+    # Hàm tính điểm trung bình của các môn
     def tinh_diem_trung_binh(self):
+        # Tính điểm trung bình bằng cách lấy tổng điểm của Toán, Văn, Anh và chia cho 3
         return (self.diem_toan + self.diem_van + self.diem_anh) / 3
 
+# Hàm main để chạy chương trình
 def main():
+    # Nhập tên học sinh từ người dùng
     ten_hocsinh = input("Nhập vào Họ và Tên: ")
+    
+    # Tạo đối tượng HocSinh với tên đã nhập
     hs = HocSinh(ten_hocsinh)
     
+    # Gọi hàm nhập điểm cho học sinh
     hs.nhap_diem()
-    
+
+    # Tính điểm trung bình
     dtb = hs.tinh_diem_trung_binh()
+    
+    # In ra kết quả, hiển thị điểm trung bình với 2 chữ số thập phân
     print(f"Học sinh {hs.ten} đạt điểm TB các môn là: {dtb:.2f}")
 
+# Nếu file đang được chạy (không phải import), thực thi hàm main
 if __name__ == "__main__":
     main()
